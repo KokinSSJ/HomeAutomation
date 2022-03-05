@@ -7,3 +7,6 @@ Using:
  - NodeRED
  - Moquitto MQTT
  
+
+Adding seperate check for SpeedTest and loading to InfluxDB
+-> In future replace with HomeAssistant integration
