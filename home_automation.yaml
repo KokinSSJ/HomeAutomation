@@ -9,7 +9,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true
-    network_mode: host
     ports:
       - "8123:8123"
     depends_on:
@@ -55,7 +54,7 @@ services:
       - "1883:1883"
       - "1884:1884"
     volumes:
-      - "/ssd/mosquitto/config:/mosquitto/config"
+      - "/ssd/HomeAutomation/mosquitto/config:/mosquitto/config"
       - "/ssd/mosquitto/data:/mosquitto/data"
       - "/ssd/mosquitto/log:/mosquitto/log"
     environment:
