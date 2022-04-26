@@ -14,7 +14,8 @@ services:
     depends_on:
       - mosquitto
 #      - mariadb
-      - influxdb
+      - influxdb:
+          condition: service_healthy
 
 # without mariadb, SQLite for now - https://www.home-assistant.io/docs/backend/database/
 #  mariadb:
@@ -56,6 +57,7 @@ services:
 
   grafana:
     image: "grafana/grafana:8.5.0"
+    container_name: grafana
     restart: unless-stopped
     user: "$PUID:$PGID"
     depends_on:
