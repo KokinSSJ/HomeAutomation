@@ -54,6 +54,17 @@ services:
       timeout: 1s
       retries: 24
 
+  grafana:
+    image: "grafana/grafana:8.5.0"
+    restart: unless-stopped
+    user: "$PUID:$PGID"
+    depends_on:
+      influxdb:
+        condition: service_healthy
+    volumes:
+      - "/ssd/grafana/data:/var/lib/grafana"
+    ports:
+      - 3000:3000
 
   nodered:
     container_name: node-red
