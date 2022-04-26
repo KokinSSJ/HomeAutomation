@@ -14,8 +14,8 @@ services:
     depends_on:
       - mosquitto
 #      - mariadb
-      - influxdb:
-          condition: service_healthy
+      influxdb:
+        condition: service_healthy
 
 # without mariadb, SQLite for now - https://www.home-assistant.io/docs/backend/database/
 #  mariadb:
