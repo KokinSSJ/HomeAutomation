@@ -12,7 +12,8 @@ services:
     ports:
       - "8123:8123"
     depends_on:
-      - mosquitto
+      mosquitto:
+        condition: service_started
 #      - mariadb
       influxdb:
         condition: service_healthy
