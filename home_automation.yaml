@@ -14,6 +14,7 @@ services:
     depends_on:
       - mosquitto
 #      - mariadb
+      - influxdb
 
 # without mariadb, SQLite for now - https://www.home-assistant.io/docs/backend/database/
 #  mariadb:
@@ -31,6 +32,28 @@ services:
 #      - /ssd/mariadb:/config
 #    ports:
 #      - "3306:3306"
+
+  influxdb:
+    image: influxdb:2.2
+    container_name: influxdb
+    restart: unless-stopped
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=influxdb-admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=XXXX
+      - DOCKER_INFLUXDB_INIT_ORG=db
+      - DOCKER_INFLUXDB_INIT_BUCKET=home-automation
+    volumes:
+      - /ssd/influxdb/data:/var/lib/influxdb2
+      - /ssd/influxdb/config:/etc/influxdb2
+    ports:
+      - 8086:8086
+    healthcheck:
+      test: [ "CMD", "curl", "-sI", "http://127.0.0.1:8086/ping" ]
+      interval: 30s
+      timeout: 1s
+      retries: 24
+
 
   nodered:
     container_name: node-red
