@@ -60,7 +60,7 @@ services:
     image: "grafana/grafana:8.5.0"
     container_name: grafana
     restart: unless-stopped
-    user: "$PUID:$PGID"
+    user: "${PUID}:${PGID}"
     depends_on:
       influxdb:
         condition: service_healthy
