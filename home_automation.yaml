@@ -131,7 +131,7 @@ services:
       - /run/udev:/run/udev:ro
       - "/ssd/zigbee2mqtt/data:/app/data"
     ports:
-      - 8080:8080
+      - 8200:8200
     environment:
       - TZ=Europe/Warsaw
     devices:
