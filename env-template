@@ -1,0 +1,5 @@
+# this is template to not lost what params I need to run home-assistant
+PUID=1000
+PGID=1000
+VSCODE_PASSWORD=
+CLOUDFLARED_DOMAIN_TUNNEL_TOKEN=
