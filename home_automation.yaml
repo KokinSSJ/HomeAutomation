@@ -152,3 +152,13 @@ services:
     environment:
       PASSWORD: "${VSCODE_PASSWORD}"
     restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    volumes:
+      - /ssd/cloudflared/date:/home/nonroot/.cloudflared/
+    command:  tunnel --no-autoupdate run --token ${CLOUDFLARED_DOMAIN_TUNNEL_TOKEN}
+
+
