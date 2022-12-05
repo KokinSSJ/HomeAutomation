@@ -140,3 +140,15 @@ services:
       - TZ=Europe/Warsaw
     devices:
       - /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2651605-if00:/dev/ttyACM0
+   
+  vscode:
+    container_name: vscode
+    image: codercom/code-server:4.8.3-debian
+    volumes:
+      - /ssd/home-assistant:/home/coder/project
+      - /ssd/vscode:/home/coder/.local/share/code-server
+    ports:
+      - "8083:8080"
+    environment:
+      PASSWORD: "${VSCODE_PASSWORD}"
+    restart: unless-stopped
