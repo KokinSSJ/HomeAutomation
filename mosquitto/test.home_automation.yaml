@@ -1,8 +1,8 @@
 # Based on https://iotechonline.com/home-assistant-install-with-docker-compose/?cn-reloaded=1
 version: '3.8'
 services:
-  homeassistant.test:
-    container_name: hass.io
+  test.homeassistant:
+    container_name: test.hass.io
     image: "homeassistant/home-assistant:2023.01"
     volumes:
       - /ssd/test.home-assistant:/config
@@ -10,4 +10,5 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     privileged: true
-
+    ports:
+      - "8124:8123"
