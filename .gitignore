@@ -1,3 +1,4 @@
 .idea
 /mosquitto/config/credentials
 .env
+.tasmota
