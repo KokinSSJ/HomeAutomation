@@ -40,6 +40,8 @@ services:
       - /ssd/mariadb:/config
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
 
   influxdb:
     image: influxdb:2.6.1
