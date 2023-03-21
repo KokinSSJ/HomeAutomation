@@ -3,7 +3,7 @@ version: '3.8'
 services:
   homeassistant:
     container_name: hass.io
-    image: "homeassistant/home-assistant:2023.1"
+    image: "homeassistant/home-assistant:2023.3.5"
     volumes:
       - /ssd/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -40,7 +40,7 @@ services:
 #      - "3306:3306"
 
   influxdb:
-    image: influxdb:2.4.0
+    image: influxdb:2.6.1
     container_name: influxdb
     restart: unless-stopped
     environment:
@@ -61,7 +61,7 @@ services:
       retries: 24
 
   grafana:
-    image: "grafana/grafana:9.1.6"
+    image: "grafana/grafana:9.4.0"
     container_name: grafana
     restart: unless-stopped
     user: "${PUID}:${PGID}"
@@ -143,7 +143,7 @@ services:
    
   vscode:
     container_name: vscode
-    image: codercom/code-server:4.8.3-debian
+    image: codercom/code-server:4.11.0-debian
     volumes:
       - /ssd/home-assistant:/home/coder/project
       - /ssd/vscode:/home/coder/.local/share/code-server
