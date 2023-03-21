@@ -18,26 +18,28 @@ services:
     depends_on:
       mosquitto:
         condition: service_started
-#      - mariadb
+      mariadb:
+        condition: service_healthy
       influxdb:
         condition: service_healthy
 
 # without mariadb, SQLite for now - https://www.home-assistant.io/docs/backend/database/
-#  mariadb:
-#    image: linuxserver/mariadb
-#    container_name: mariadb
-#    restart: unless-stopped
-#    environment:
-#      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-#      MYSQL_DATABASE: ha_db
-#      MYSQL_USER: homeassistant
-#      MYSQL_PASSWORD: "${HA_MYSQL_PASSWORD}"
-#      PUID: 1000
-#      PGID: 1000
-#    volumes:
-#      - /ssd/mariadb:/config
-#    ports:
-#      - "3306:3306"
+  mariadb:
+    image: linuxserver/mariadb:10.6.12
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: ha_db
+      MYSQL_USER: homeassistant
+      MYSQL_PASSWORD: "${HA_MYSQL_PASSWORD}"
+      PUID: 1000
+      PGID: 1000
+      TZ: "Europe/Warsaw"
+    volumes:
+      - /ssd/mariadb:/config
+    ports:
+      - "3306:3306"
 
   influxdb:
     image: influxdb:2.6.1
