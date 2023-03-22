@@ -3,7 +3,7 @@ version: '3.8'
 services:
   test.homeassistant:
     container_name: test.hass.io
-    image: "homeassistant/home-assistant:2023.1"
+    image: "homeassistant/home-assistant:2023.3.5"
     volumes:
       - /ssd/test.home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -12,3 +12,40 @@ services:
     privileged: true
     ports:
       - "8124:8123"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+  test.mariadb:
+    image: linuxserver/mariadb:10.6.12
+    container_name: test.mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: ha_db
+      MYSQL_USER: homeassistant
+      MYSQL_PASSWORD: "${HA_MYSQL_PASSWORD}"
+      PUID: 1000
+      PGID: 1000
+      TZ: "Europe/Warsaw"
+    volumes:
+      - /ssd/test.mariadb:/config
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
+
+  test.mosquitto:
+    image: eclipse-mosquitto:2.0.15
+    container_name: test.mosquitto
+    restart: unless-stopped
+    ports:
+      - "1882:1883"
+      - "1885:1884"
+    volumes:
+      - "/ssd/HomeAutomation/mosquitto/config:/mosquitto/config"
+      - "/ssd/test.mosquitto/data:/mosquitto/data"
+      - "/ssd/test.mosquitto/log:/mosquitto/log"
+    environment:
+      - TZ=Europe/Warsaw
+    user: "${PUID}:${PGID}"
