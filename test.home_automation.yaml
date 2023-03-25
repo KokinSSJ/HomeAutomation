@@ -13,7 +13,7 @@ services:
     ports:
       - "8124:8123"
     depends_on:
-      mariadb:
+      test.mariadb:
         condition: service_healthy
 
   test.mariadb:
@@ -35,17 +35,3 @@ services:
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "--silent" ]
 
-  test.mosquitto:
-    image: eclipse-mosquitto:2.0.15
-    container_name: test.mosquitto
-    restart: unless-stopped
-    ports:
-      - "1882:1883"
-      - "1885:1884"
-    volumes:
-      - "/ssd/HomeAutomation/mosquitto/config:/mosquitto/config"
-      - "/ssd/test.mosquitto/data:/mosquitto/data"
-      - "/ssd/test.mosquitto/log:/mosquitto/log"
-    environment:
-      - TZ=Europe/Warsaw
-    user: "${PUID}:${PGID}"
