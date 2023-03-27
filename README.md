@@ -160,8 +160,10 @@ How to start test HA instance.
 Notice that you may see data in your test HA because server is connected to common MQTT instance.
 
 ---
-InfluxDB
+# InfluxDB
 
+Install
+---
 1. After starting InfluxDB database, configuring it in Home Assistant:
 /ssd/home-assistant/configuration.yaml
 ```yaml
@@ -187,4 +189,13 @@ INFLUXDB_ORGANIZATION: db
 ```
 
 ---
+Backups
+---
+1. Login via SSH to server
+2. `docker exec -it influxdb bash`
+3. `influx backup /backups/backup_$(date '+%Y-%m-%d_%H-%M') -t <INFLUXDB_INIT_ADMIN_TOKEN>`
+
+Restore
+---
+https://docs.influxdata.com/influxdb/v2.6/reference/cli/influx/restore/
 
