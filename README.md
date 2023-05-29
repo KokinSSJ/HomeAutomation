@@ -43,7 +43,12 @@ MARIADB_URL: mysql://homeassistant:<HA_MYSQL_PASSWORD>@mariadb/ha_db?charset=utf
 ```
 4. Restart HA -> docker restart hass.io
 ---
-# Migration of SQLite to MariaDB with setup
+Backup
+---
+1. `docker exec -it mariadb bash`
+2. `mysqldump -u homeassistant -p<HA_MYSQL_PASSWORD> --all-databases | gzip > /backups/database_`date '+%m-%d-%Y'`.sql.gz` Notice there is no space after -p and before password
+
+Migration of SQLite to MariaDB with setup
 ---
 First disclaimer: This process is describe how to do migration from SQLite to MariaDB and you didn't configure MariaDB in Home Assistant yet. 
 If you already have MariaDB and you have old SQLite data which you want to restore (join with current data) this instruction is not for you.
@@ -194,6 +199,7 @@ Backups
 1. Login via SSH to server
 2. `docker exec -it influxdb bash`
 3. `influx backup /backups/backup_$(date '+%Y-%m-%d_%H-%M') -t <INFLUXDB_INIT_ADMIN_TOKEN>`
+4. `tar -czvf backup_XXXXXX /ssd/backups/influxdb/backup_XXXX` Where XXXX is name from previous step.
 
 Restore
 ---
