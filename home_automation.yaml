@@ -147,18 +147,19 @@ services:
     devices:
       - /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2651605-if00:/dev/ttyACM0
    
-  vscode:
-    container_name: vscode
-    image: codercom/code-server:4.11.0-debian
-    volumes:
-      - /ssd/home-assistant:/home/coder/project
-      - /ssd/vscode:/home/coder/.local/share/code-server
-    user: root
-    ports:
-      - "8083:8080"
-    environment:
-      PASSWORD: "${VSCODE_PASSWORD}"
-    restart: unless-stopped
+# 20230529 disabling as it's not used and it slows down raspberry pi 3B :(
+#  vscode:
+#    container_name: vscode
+#    image: codercom/code-server:4.11.0-debian
+#    volumes:
+#      - /ssd/home-assistant:/home/coder/project
+#      - /ssd/vscode:/home/coder/.local/share/code-server
+#    user: root
+#    ports:
+#      - "8083:8080"
+#    environment:
+#      PASSWORD: "${VSCODE_PASSWORD}"
+#    restart: unless-stopped
 
   cloudflared:
     image: cloudflare/cloudflared:latest
