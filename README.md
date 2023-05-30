@@ -199,7 +199,7 @@ Backups
 1. Login via SSH to server
 2. `docker exec -it influxdb bash`
 3. `influx backup /backups/backup_$(date '+%Y-%m-%d_%H-%M') -t <INFLUXDB_INIT_ADMIN_TOKEN>`
-4. `tar -czvf backup_XXXXXX /ssd/backups/influxdb/backup_XXXX` Where XXXX is name from previous step.
+4. `tar -czvf backup_XXXXXX.tar.gz /ssd/backups/influxdb/backup_XXXX` Where XXXX is name from previous step.
 
 Restore
 ---
