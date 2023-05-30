@@ -46,7 +46,12 @@ MARIADB_URL: mysql://homeassistant:<HA_MYSQL_PASSWORD>@mariadb/ha_db?charset=utf
 Backup
 ---
 1. `docker exec -it mariadb bash`
-2. `mysqldump -u homeassistant -p<HA_MYSQL_PASSWORD> --all-databases | gzip > /backups/database_`date '+%m-%d-%Y'`.sql.gz` Notice there is no space after -p and before password
+2. `mysqldump -u homeassistant -p<HA_MYSQL_PASSWORD> --all-databases | gzip > /backups/database_`date '+%Y-%m-%d'`.sql.gz` Notice there is no space after -p and before password
+
+To automate backups I put above to script /tools/backup_mariadb.sh and added to crontab
+`crontab -e`
+`30 1 * * 1 /ssd/HomeAutomation/tools/backup_mariadb.sh >> /ssd/backups/mariadb/backup_mariadb.log 2>&1` 1:30am every Monday
+
 
 Migration of SQLite to MariaDB with setup
 ---
@@ -200,6 +205,12 @@ Backups
 2. `docker exec -it influxdb bash`
 3. `influx backup /backups/backup_$(date '+%Y-%m-%d_%H-%M') -t <INFLUXDB_INIT_ADMIN_TOKEN>`
 4. `tar -czvf backup_XXXXXX.tar.gz /ssd/backups/influxdb/backup_XXXX` Where XXXX is name from previous step.
+
+To automate backups I put above to script /tools/backup_influxdb.sh and added to crontab
+   `crontab -e`
+   `0 1 * * 1 /ssd/HomeAutomation/tools/backup_influxdb.sh >> /ssd/backups/influxdb/backup_influxdb.log 2>&1` 1:00am every Monday
+
+
 
 Restore
 ---
