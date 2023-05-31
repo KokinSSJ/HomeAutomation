@@ -23,6 +23,7 @@ services:
       influxdb:
         condition: service_healthy
     healthcheck:
+      test: ["CMD" "curl" "--fail" "http://localhost:8123/"]
       start_period: 120s
       interval: 30s
       retries: 5
@@ -98,7 +99,7 @@ services:
       homeassistant:
         condition: service_healthy
       mosquitto:
-        condition: service_healthy
+        condition: service_started
     environment:
       TZ: "Europe/Warsaw"
     restart: unless-stopped
