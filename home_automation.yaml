@@ -23,7 +23,7 @@ services:
       influxdb:
         condition: service_healthy
     healthcheck:
-      test: ["CMD" "curl" "--fail" "http://localhost:8123/"]
+      test: ["CMD", "curl", "--fail", "http://localhost:8123/"]
       start_period: 120s
       interval: 30s
       retries: 5
