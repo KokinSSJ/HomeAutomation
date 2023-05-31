@@ -22,6 +22,11 @@ services:
         condition: service_healthy
       influxdb:
         condition: service_healthy
+    healthcheck:
+      start_period: 120s
+      interval: 30s
+      retries: 5
+      timeout: 5s
 
 # without mariadb, SQLite for now - https://www.home-assistant.io/docs/backend/database/
   mariadb:
@@ -65,6 +70,7 @@ services:
       interval: 30s
       timeout: 1s
       retries: 24
+      start_period: 60s
 
   grafana:
     image: "grafana/grafana:9.4.0"
@@ -73,6 +79,8 @@ services:
     user: "${PUID}:${PGID}"
     depends_on:
       influxdb:
+        condition: service_healthy
+      homeassistant:
         condition: service_healthy
     volumes:
       - "/ssd/grafana/data:/var/lib/grafana"
@@ -87,8 +95,10 @@ services:
     volumes:
       - /ssd/nodered:/data
     depends_on:
-      - homeassistant
-      - mosquitto
+      homeassistant:
+        condition: service_healthy
+      mosquitto:
+        condition: service_healthy
     environment:
       TZ: "Europe/Warsaw"
     restart: unless-stopped
