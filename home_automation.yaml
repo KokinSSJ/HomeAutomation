@@ -72,8 +72,8 @@ services:
       - 8086:8086
     healthcheck:
       test: [ "CMD", "curl", "-sI", "http://127.0.0.1:8086/ping" ]
-      interval: 60s
-      timeout: 1s
+      interval: 120s
+      timeout: 5s
       retries: 24
       start_period: 60s
 
