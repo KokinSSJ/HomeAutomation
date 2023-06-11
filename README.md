@@ -50,8 +50,11 @@ Backup
 
 To automate backups I put above to script /tools/backup_mariadb.sh and added to crontab
 `sudo crontab -e`
-`30 1 * * 1 /ssd/HomeAutomation/tools/backup_mariadb.sh >> /ssd/backups/mariadb/backup_mariadb.log 2>&1` 1:30am every Monday
-
+`0 2 * * 1 /ssd/HomeAutomation/tools/backup_mariadb.sh >> /ssd/backups/mariadb/backup_mariadb.log 2>&1` 1:30am every Monday
+---
+Connecting to Mariadb
+`mysql  -u homeassistant -p<HA_MYSQL_PASSWORD> ha_db` or
+`docker exec -it mariadb mysql -u homeassistant -p<HA_MYSQL_PASSWORD> ha_db`
 
 Migration of SQLite to MariaDB with setup
 ---
@@ -215,4 +218,12 @@ To automate backups I put above to script /tools/backup_influxdb.sh and added to
 Restore
 ---
 https://docs.influxdata.com/influxdb/v2.6/reference/cli/influx/restore/
+
+
+------------------------
+Loop for pulling images.
+---
+As pulling images on Raspberry Pi 3B is taking a while it is better to do it not via docker-compose command (docker compose pull take only one parameter / image at the time)
+or here by many docker pull one by one in queue.
+for img in homeassistant/home-assistant:2023.5.4  linuxserver/mariadb:10.6.13 influxdb:2.7.1 grafana/grafana:9.5.2 nodered/node-red:3.0.2-18 koenkk/zig bee2mqtt:1.31.0 cloudflare/cloudflared:2023.5.1 ; do docker pull $img; done
 
