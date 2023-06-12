@@ -3,7 +3,7 @@ version: '3.8'
 services:
   homeassistant:
     container_name: hass.io
-    image: "homeassistant/home-assistant:2023.5.4"
+    image: "homeassistant/home-assistant:2023.6.1"
     volumes:
       - /ssd/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
