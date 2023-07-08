@@ -3,7 +3,7 @@ version: '3.8'
 services:
   test.homeassistant:
     container_name: test.hass.io
-    image: "homeassistant/home-assistant:2023.3.5"
+    image: "homeassistant/home-assistant:2023.6.1"
     volumes:
       - /ssd/test.home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -17,7 +17,7 @@ services:
         condition: service_healthy
 
   test.mariadb:
-    image: linuxserver/mariadb:10.6.12
+    image: linuxserver/mariadb:10.6.13
     container_name: test.mariadb
     restart: unless-stopped
     environment:
