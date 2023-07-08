@@ -43,6 +43,11 @@ MARIADB_URL: mysql://homeassistant:<HA_MYSQL_PASSWORD>@mariadb/ha_db?charset=utf
 ```
 4. Restart HA -> docker restart hass.io
 ---
+# Przydatne MariaDB
+select count(*), now(), DATE(FROM_UNIXTIME(last_updated_ts)) as last_upd from states group by last_upd;
+select count(*) as cnt, now(), DATE(FROM_UNIXTIME(last_updated_ts)) as last_upd, metadata_id from states group by last_upd, metadata_id order by cnt desc limit 50;
+select count(*) as cnt, now(), DATE(FROM_UNIXTIME(last_updated_ts)) as last_upd, metadata_id from states group by metadata_id order by cnt desc limit 50;
+---
 Backup
 ---
 1. `docker exec -it mariadb bash`

@@ -1,0 +1,1 @@
+speedometer -r enp1s0 -t enp1s0
