@@ -161,6 +161,8 @@ services:
       - TZ=Europe/Warsaw
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
+#      know bug in Debian 11 with udev 247.3-7 so cannot use by-id https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1035094
+#      - /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2651605-if00:/dev/ttyACM0
 
 # 20230529 disabling as it's not used and it slows down raspberry pi 3B :(
 #  vscode:
