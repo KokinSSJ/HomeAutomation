@@ -14,7 +14,7 @@ echo $BACKUP_TIME
 # no '-it' as it runs in crontab
 docker exec influxdb influx backup /backups/backup_$BACKUP_TIME -t $TOKEN
 
-sudo tar -czvf /ssd/backups/influxdb/backup_$BACKUP_TIME.tar.gz /ssd/backups/influxdb/backup_$BACKUP_TIME
+sudo tar -cvf /ssd/backups/influxdb/backup_$BACKUP_TIME.tar /ssd/backups/influxdb/backup_$BACKUP_TIME
 
 sudo rm -rf /ssd/backups/influxdb/backup_$BACKUP_TIME/
 
