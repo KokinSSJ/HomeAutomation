@@ -148,19 +148,19 @@ services:
 
 # UNVERIFIED IF zigbee2mqtt has good settings
 # check https://www.zigbee2mqtt.io/guide/installation/02_docker.html#docker-compose
-  zigbee2mqtt:
-    container_name: zigbee2mqtt
-    image: koenkk/zigbee2mqtt:1.31.0
-    restart: unless-stopped
-    volumes:
-      - /run/udev:/run/udev:ro
-      - "/ssd/zigbee2mqtt/data:/app/data"
-    ports:
-      - 8200:8200
-    environment:
-      - TZ=Europe/Warsaw
-    devices:
-      - /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2651605-if00:/dev/ttyACM0
+#  zigbee2mqtt:
+#    container_name: zigbee2mqtt
+#    image: koenkk/zigbee2mqtt:1.31.0
+#    restart: unless-stopped
+#    volumes:
+#      - /run/udev:/run/udev:ro
+#      - "/ssd/zigbee2mqtt/data:/app/data"
+#    ports:
+#      - 8200:8200
+#    environment:
+#      - TZ=Europe/Warsaw
+#    devices:
+#      - /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2651605-if00:/dev/ttyACM0
    
 # 20230529 disabling as it's not used and it slows down raspberry pi 3B :(
 #  vscode:
