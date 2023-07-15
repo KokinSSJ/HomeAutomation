@@ -47,6 +47,23 @@ MARIADB_URL: mysql://homeassistant:<HA_MYSQL_PASSWORD>@mariadb/ha_db?charset=utf
 select count(*), now(), DATE(FROM_UNIXTIME(last_updated_ts)) as last_upd from states group by last_upd;
 select count(*) as cnt, now(), DATE(FROM_UNIXTIME(last_updated_ts)) as last_upd, metadata_id from states group by last_upd, metadata_id order by cnt desc limit 50;
 select count(*) as cnt, now(), DATE(FROM_UNIXTIME(last_updated_ts)) as last_upd, metadata_id from states group by metadata_id order by cnt desc limit 50;
+select id, DATE(FROM_UNIXTIME(created_ts)) as created_ts, state, sum from statistics where DATE(FROM_UNIXTIME(created_ts))> '2023-07-06' and metadata_id=89  limit 100;
+select state_id, state, FROM_UNIXTIME(last_updated_ts) as last_updated_ts, old_state_id from states where metadata_id=527 and DATE(FROM_UNIXTIME(last_updated_ts))> '2023-07-01' limit 30;
+
+
+select * from states_meta where entity_id='sensor.gniazdko_2_kwh_monthly_t2_popoludniowa';
+select state_id, state, FROM_UNIXTIME(last_updated_ts) as last_updated_ts, old_state_id from states where metadata_id=526 and DATE(FROM_UNIXTIME(last_updated_ts))> '2023-07-01' limit 30;
+
+
+select * from statistics_meta where statistic_id='sensor.gniazdko_2_kwh_monthly_t2_popoludniowa';
+select id, FROM_UNIXTIME(start_ts), FROM_UNIXTIME(created_ts), state, sum from statistics_short_term where metadata_id=88 limit 300;
+select id, DATE(FROM_UNIXTIME(created_ts)) as created_ts, state, sum, min, max, mean from statistics where DATE(FROM_UNIXTIME(created_ts))> '2023-07-03' and metadata_id=88  limit 100;
+update statistics set sum=68.42000000000021 where id in (737493, 737785,737885, 737984, 738083, 738182, 738281, 738380, 738479)
+update statistics_short_term set sum=68.42000000000021 where metadata_id=88;
+
+
+select id, FROM_UNIXTIME(start_ts), FROM_UNIXTIME(created_ts), state, sum from statistics_short_term where metadata_id=(select id from statistics_meta where statistic_id='sensor.gniazdko_2_kwh_monthly_t2_popoludniowa') limit 300;
+
 ---
 Backup
 ---
@@ -224,6 +241,9 @@ Restore
 ---
 https://docs.influxdata.com/influxdb/v2.6/reference/cli/influx/restore/
 
+Przydaten
+---
+influx delete --bucket home-automation --start 2023-07-08T19:00:00Z --stop 2023-07-12T12:00:00Z --predicate '_measurement="%" AND domain="sensor" AND entity_id="tasmota_2_3_status"'
 
 ------------------------
 Loop for pulling images.
