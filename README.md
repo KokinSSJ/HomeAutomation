@@ -243,7 +243,9 @@ https://docs.influxdata.com/influxdb/v2.6/reference/cli/influx/restore/
 
 Przydaten
 ---
-influx delete --bucket home-automation --start 2023-07-08T19:00:00Z --stop 2023-07-12T12:00:00Z --predicate '_measurement="%" AND domain="sensor" AND entity_id="tasmota_2_3_status"'
+influx delete --bucket home-automation --start 2023-08-09T07:39:00Z --stop 2023-12-09T07:45:00Z --predicate '_measurement="°C" AND domain="sensor" AND entity_id="actual_boiler_temperature"'
+
+influx delete --bucket home-automation --start 2023-08-09T07:39:00Z --stop 2023-12-09T07:45:00Z --predicate '_measurement="V" AND domain="sensor" AND entity_id="voltage_phase1"'
 
 ------------------------
 Loop for pulling images.
