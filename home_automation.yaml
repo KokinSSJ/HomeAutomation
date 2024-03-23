@@ -3,7 +3,7 @@ version: '3.8'
 services:
   homeassistant:
     container_name: hass.io
-    image: "homeassistant/home-assistant:2024.1.6"
+    image: "homeassistant/home-assistant:2024.3.3"
     volumes:
       - /ssd/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -78,7 +78,7 @@ services:
       start_period: 10s
 
   grafana:
-    image: "grafana/grafana:10.3.1"
+    image: "grafana/grafana:10.3.5"
     container_name: grafana
     restart: unless-stopped
     user: "${PUID}:${PGID}"
@@ -94,7 +94,7 @@ services:
 
   nodered:
     container_name: node-red
-    image: nodered/node-red:3.1.3-18
+    image: nodered/node-red:3.1.7-18
     ports:
       - "1880:1880"
     volumes:
@@ -179,7 +179,7 @@ services:
 #    restart: unless-stopped
 
   cloudflared:
-    image: cloudflare/cloudflared:2024.1.5
+    image: cloudflare/cloudflared:2024.3.0
     container_name: cloudflared
     restart: unless-stopped
     volumes:
