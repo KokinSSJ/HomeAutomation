@@ -42,6 +42,7 @@ services:
       PUID: 1000
       PGID: 1000
       TZ: "Europe/Warsaw"
+      MARIADB_AUTO_UPGRADE: "1"
     volumes:
       - /ssd/mariadb:/config
       - /ssd/backups/mariadb:/backups
