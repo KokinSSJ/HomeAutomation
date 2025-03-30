@@ -3,7 +3,7 @@ version: '3.8'
 services:
   homeassistant:
     container_name: hass.io
-    image: "homeassistant/home-assistant:2025.1.2"
+    image: "homeassistant/home-assistant:2025.3.4"
     volumes:
       - /ssd/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -31,7 +31,7 @@ services:
 
 # without mariadb, SQLite for now - https://www.home-assistant.io/docs/backend/database/
   mariadb:
-    image: linuxserver/mariadb:10.11.8
+    image: linuxserver/mariadb:10.11.10
     container_name: mariadb
     restart: unless-stopped
     environment:
@@ -79,7 +79,7 @@ services:
       start_period: 10s
 
   grafana:
-    image: "grafana/grafana:11.4.0"
+    image: "grafana/grafana:11.6.0"
     container_name: grafana
     restart: unless-stopped
     user: "${PUID}:${PGID}"
@@ -95,7 +95,7 @@ services:
 
   nodered:
     container_name: node-red
-    image: nodered/node-red:4.0.8-22
+    image: nodered/node-red:4.0.9-22
     ports:
       - "1880:1880"
     volumes:
@@ -110,7 +110,7 @@ services:
     restart: unless-stopped
 
   mosquitto:
-    image: eclipse-mosquitto:2.0.20
+    image: eclipse-mosquitto:2.0.21
     container_name: mosquitto
     restart: unless-stopped
     ports:
@@ -180,7 +180,7 @@ services:
 #    restart: unless-stopped
 
   cloudflared:
-    image: cloudflare/cloudflared:2025.1.0
+    image: cloudflare/cloudflared:2025.2.1
     container_name: cloudflared
     restart: unless-stopped
     volumes:
