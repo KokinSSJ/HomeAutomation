@@ -3,7 +3,7 @@ version: '3.8'
 services:
   homeassistant:
     container_name: hass.io
-    image: "homeassistant/home-assistant:2025.3.4"
+    image: "homeassistant/home-assistant:2025.9.4"
     volumes:
       - /ssd/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -95,7 +95,7 @@ services:
 
   nodered:
     container_name: node-red
-    image: nodered/node-red:4.0.9-22
+    image: nodered/node-red:4.1.0-22
     ports:
       - "1880:1880"
     volumes:
@@ -110,7 +110,7 @@ services:
     restart: unless-stopped
 
   mosquitto:
-    image: eclipse-mosquitto:2.0.21
+    image: eclipse-mosquitto:2.0.22
     container_name: mosquitto
     restart: unless-stopped
     ports:
@@ -180,7 +180,7 @@ services:
 #    restart: unless-stopped
 
   cloudflared:
-    image: cloudflare/cloudflared:2025.2.1
+    image: cloudflare/cloudflared:2025.9.1
     container_name: cloudflared
     restart: unless-stopped
     volumes:
